@@ -4,14 +4,14 @@ from fastapi import FastAPI, HTTPException
 from loggers.logger_req import logger
 
 WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather?'
-API_KEY = os.getenv('WEATHER_API_KEY')
+API_KEY =  os.environ.get('WEATHER_API_KEY')
 
 if not API_KEY:
     raise ValueError('WEATHER_API_KEY environment variable not set')
 
-async def get_weather(city:str) -> str:
+async def get_weather_summary(city:str) -> str:
     logger.debug(f'Fetching weather summary for {city}')
-    try
+    try:
         async with httpx.AsyncClient(timeout=10) as client:
             resp = await client.get(WEATHER_URL,params={'q':city,'appid':API_KEY,'units':'metric'})
     except httpx.RequestError as exc:

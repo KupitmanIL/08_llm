@@ -67,8 +67,8 @@ def test_travel_info_response_valid_data():
     response = TravelInfoResponse(
         country_from="Israel",
         country_to="Germany",
-        is_capital="Berlin",
-        is_weather="Sunny",
+        capital_to="Berlin",
+        weather = "Sunny",
         currency_code_from="ILS",
         currency_code_to="EUR",
         currency_name_from="Israeli Shekel",
@@ -78,8 +78,8 @@ def test_travel_info_response_valid_data():
 
     assert response.country_from == "Israel"
     assert response.country_to == "Germany"
-    assert response.is_capital == "Berlin"
-    assert response.is_weather == "Sunny"
+    assert response.capital_to == "Berlin"
+    assert response.weather == "Sunny"
     assert response.currency_code_from == "ILS"
     assert response.currency_code_to == "EUR"
     assert response.currency_name_from == "Israeli Shekel"
@@ -93,8 +93,8 @@ def test_travel_info_response_optional_fields():
         country_to="Germany"
     )
 
-    assert response.is_capital is None
-    assert response.is_weather is None
+    assert response.capital_to is None
+    assert response.weather is None
     assert response.currency_code_from is None
     assert response.currency_code_to is None
     assert response.currency_name_from is None

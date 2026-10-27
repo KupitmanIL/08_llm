@@ -18,7 +18,7 @@ async def get_weather_summary(city:str) -> str:
         logger.error(f'Weather service unreachable {exc}')
         raise HTTPException(status_code=502, detail='Weather service unreachable') from exc
 
-    if resp.status_code != 404:
+    if resp.status_code == 404:
         logger.warning(f'City not found: {city}')
         raise HTTPException(status_code=404, detail=f'City {city} not found')
 
@@ -32,4 +32,4 @@ async def get_weather_summary(city:str) -> str:
     humidity = data['main']['humidity']
     wind_speed = data['wind']['speed']
     condition = data['weather'][0]['description']
-    return f'Weather in {city}: condition {condition}, temperature {temp}C, humidity {humidity}, wind {wind_speed}km/h '
+    return f"Weather in {city}: {condition}, {temp}°C, {humidity}% humidity, {wind_speed} m/s wind"

@@ -13,9 +13,9 @@ async def get_exchange_rate (code_from:str ,code_to:str) -> float:
     logger.debug(f'Fetching exchange rate for {code_from} to {code_to}')
     try:
         async with httpx.AsyncClient(timeout=10) as client:
-            resp = await client.get(FIXER_URL,params={'from':code_from,'to':code_to,'amount':1}, headers={'API-KEY':API_KEY})
+            resp = await client.get(FIXER_URL,params={'from':code_from,'to':code_to,'amount':1}, headers={'apikey':API_KEY})
     except httpx.RequestError as exc:
-        logger.error(f'Weather service unreachable {exc}')
+        logger.error(f'Currency service unreachable {exc}')
         raise HTTPException(status_code=502, detail='Currency service unreachable') from exc
 
     try:
@@ -31,4 +31,4 @@ async def get_exchange_rate (code_from:str ,code_to:str) -> float:
         return data['info']['rate']
     except(KeyError, TypeError) as exc:
         logger.error(f'Unexpected currency response for {code_from} to {code_to}: {exc}')
-        raise HTTPException(status_code=502, detail=f'Unexpected currency response for for {code_from} to {code_to}')
+        raise HTTPException(status_code=502, detail=f'Unexpected currency response for {code_from} to {code_to}')

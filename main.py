@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from starlette.responses import JSONResponse
 
-from middlewares.loggin_middlewares import logging_middleware
+from middlewares.logging_middlewares import logging_middleware
 from routes.travel_routes import router
 
 app = FastAPI()

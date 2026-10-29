@@ -87,7 +87,7 @@ async def get_country_info(country_name: str) -> CountryInfo:
         capital = item["capitals"][0]["name"]
         currency_code = item["currencies"][0]["code"]
         currency_name = item["currencies"][0]["name"]
-    except (KeyError, TypeError) as exc:
+    except (KeyError, TypeError, IndexError) as exc:
         logger.error(f"Unexpected country response for {country_name}: {exc}")
         raise HTTPException(status_code=502, detail=f"Unexpected country response for {country_name}") from exc
     return CountryInfo(capital=capital, currency_code=currency_code, currency_name=currency_name)

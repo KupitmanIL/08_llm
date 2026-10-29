@@ -26,7 +26,7 @@ async def get_weather_summary(city:str) -> str:
         resp.raise_for_status()
     except httpx.HTTPStatusError as exc:
         logger.error(f'Error fetching weather data {exc}')
-        raise HTTPException(status_code=500, detail=f'Error fetching weather data {exc}')
+        raise HTTPException(status_code=502, detail=f'Error fetching weather data {exc}')
     data = resp.json()
     temp = data['main']['temp']
     humidity = data['main']['humidity']
